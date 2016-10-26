@@ -47,6 +47,14 @@ namespace WebApplication
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+
+            // Adding options so we can inject configurations.
+            services.AddOptions();
+            // Register the bot credentials section
+            services.Configure<BotCredentials>(Configuration.GetSection("BotCredentials"));
+            // we'll be catching tokens, so enable MemoryCache.
+            services.AddMemoryCache();
+
             services.AddMvc();
 
             // Add application services.
